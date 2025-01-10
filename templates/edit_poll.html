@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier le Sondage</title>
+    <link rel="stylesheet" href="../static/main.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Modifier le Sondage</h1>
+
+        <form id="pollEditForm">
+            <label for="pollName">Nom du sondage</label>
+            <input type="text" id="pollName" name="name" required>
+
+            <div id="questionsContainer">
+                <!-- Questions will be dynamically inserted here -->
+            </div>
+
+            <button type="button" onclick="addQuestion()">Ajouter une question</button>
+            <button type="submit">Mettre à jour le sondage</button>
+        </form>
+    </div>
+    <script src="../static/edit.js"></script>
+</body>
+
+</html>

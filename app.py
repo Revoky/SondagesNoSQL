@@ -107,7 +107,39 @@ def get_polls():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+    
+    # _____ Route mise à jour _____
 
+@app.route('/sondages/edit/<poll_id>', methods=['GET'])
+def edit_poll(poll_id):
+    try:
+        poll = sondages_collection.find_one({"_id": ObjectId(poll_id)})
+        
+        if not poll:
+            return jsonify({"message": "Poll not found"}), 404
+
+        return render_template('edit_poll.html', poll=poll)
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
+# _____ Route suppression _____
+
+@app.route('/sondages/<poll_id>', methods=['DELETE'])
+def delete_poll(poll_id):
+    try:
+        result = sondages_collection.delete_one({"_id": ObjectId(poll_id)})
+        
+        if result.deleted_count == 0:
+            return jsonify({"message": "Poll not found"}), 404
+
+        return jsonify({"message": f"Poll with ID {poll_id} deleted successfully"}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
