@@ -21,7 +21,6 @@ def index():
 @app.route('/sondages/list')
 def list_polls():
     try:
-        # Récupérer uniquement les noms des sondages
         polls = list(sondages_collection.find({}, {"_id": 1, "name": 1}))
         
         if not polls:
@@ -38,13 +37,11 @@ def list_polls():
 @app.route('/sondages/<poll_id>')
 def show_poll(poll_id):
     try:
-        # Trouver le sondage par son _id
         poll = sondages_collection.find_one({"_id": ObjectId(poll_id)})
         
         if not poll:
             return jsonify({"message": "Poll not found"}), 404
 
-        # Convertir les ObjectId des questions en string
         for question in poll.get("questions", []):
             question["_id"] = str(question["_id"])
 
