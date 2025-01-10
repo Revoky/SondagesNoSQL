@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ poll.name }}</title>
+    <link rel="stylesheet" href="../static/main.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>{{ poll.name }}</h1>
+
+    {% if poll.questions %}
+        <ul>
+            {% for question in poll.questions %}
+                <li>
+                    <strong>{{ question.title }}</strong> ({{ question.type }})
+                    {% if question.type == 'qcm' %}
+                        <ul>
+                            {% for reponse in question.reponses %}
+                                <li>{{ reponse }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucune question pour ce sondage.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

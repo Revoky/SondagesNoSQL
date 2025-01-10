@@ -1,0 +1,149 @@
+/* Importation de la police depuis Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e8f0f3; /* Fond clair et moderne */
+}
+
+.container {
+    width: 60%;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Coins arrondis */
+}
+
+h1 {
+    text-align: center;
+    color: #333333; /* Couleur du titre plus foncée */
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 25px; /* Espacement plus large entre les champs */
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #444444; /* Couleur douce et agréable pour les labels */
+    margin-bottom: 8px;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9; /* Fond clair pour les champs */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: #4CAF50; /* Bordure verte lors de la sélection */
+    background-color: #ffffff; /* Changement de fond au focus */
+}
+
+.form-group input[type="text"] {
+    height: 40px;
+}
+
+.form-group button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-group button:hover {
+    background-color: #45a049;
+}
+
+.questions-container {
+    margin-top: 30px;
+}
+
+.question {
+    margin-bottom: 25px;
+}
+
+.question label {
+    margin-bottom: 8px;
+}
+
+.question input {
+    margin-top: 5px;
+}
+
+.question input[type="text"] {
+    margin-bottom: 10px;
+}
+
+/* Section pour les boutons d'ajout de question (si nécessaire) */
+.add-question-button {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.add-question-button:hover {
+    background-color: #1976D2;
+}
+
+/* Responsivité pour les petits écrans */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-group input, .form-group select, .form-group button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* Stylisation du bouton Ajouter une question */
+.add-question-button {
+    background-color: #2196F3; /* Couleur bleue attractive */
+    color: white;
+    padding: 8px 15px; /* Réduire la taille du bouton */
+    font-size: 14px; /* Taille de texte plus petite */
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px; /* Espacement avant le bouton de création du sondage */
+    width: auto; /* Largeur automatique pour un bouton plus petit */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-align: center;
+}
+
+.add-question-button:hover {
+    background-color: #1976D2; /* Couleur bleue plus foncée au survol */
+    transform: translateY(-2px); /* Légère élévation pour l'effet de survol */
+}
+
+.add-question-button:active {
+    transform: translateY(0); /* Effet de clic, retour à la position d'origine */
+}

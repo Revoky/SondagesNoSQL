@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Sondages</title>
+    <link rel="stylesheet" href="../static/main.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Liste des Sondages</h1>
+
+    {% if polls %}
+        <ul>
+            {% for poll in polls %}
+                <li>
+                    <a href="/sondages/{{ poll._id }}"> {{ poll.name }} </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun sondage trouvé.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
