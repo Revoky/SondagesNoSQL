@@ -65,7 +65,7 @@ function addQuestion() {
 
 const addButton = document.createElement("button");
 addButton.type = "button";
-addButton.classList.add("add-question-button"); // Ajoute la classe pour appliquer le style
+addButton.classList.add("add-question-button");
 addButton.textContent = "Ajouter une question";
 addButton.addEventListener("click", addQuestion);
 document.querySelector(".container").appendChild(addButton);
