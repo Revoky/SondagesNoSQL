@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/main.css">
     <title>Créer un Sondage</title>
 </head>
+
 <body>
+    <div class="container">
+        <a href="/sondages/list">Voir la liste des sondages</a>
 
-<div class="container">
-    <a href="/sondages/list">Voir la liste des sondages</a>
-
-    <h1>Créer un Sondage</h1>
-    <form id="pollForm">
-        <div class="form-group">
-            <label for="pollName">Nom du Sondage</label>
-            <input type="text" id="pollName" name="name" required>
-        </div>
-
-        <div class="questions-container" id="questionsContainer">
-            <div class="form-group question">
-                <label for="questionTitle">Titre de la Question</label>
-                <input type="text" class="questionTitle" name="questionTitle" required>
-                <label for="questionType">Type de Question</label>
-                <select class="questionType" name="questionType">
-                    <option value="ouverte">Ouverte</option>
-                    <option value="qcm">QCM</option>
-                </select>
-                <label for="questionReponses">Réponses (si QCM, séparez par une virgule)</label>
-                <input type="text" class="questionReponses" name="questionReponses">
+        <h1>Créer un Sondage</h1>
+        <form id="pollForm">
+            <div class="form-group">
+                <label for="pollName">Nom du Sondage</label>
+                <input type="text" id="pollName" name="name" required>
             </div>
-        </div>
 
-        <div class="form-group">
-            <button type="submit">Créer le Sondage</button>
-        </div>
-    </form>
-</div>
+            <div class="questions-container" id="questionsContainer">
+                <div class="form-group question">
+                    <label for="questionTitle">Titre de la Question</label>
+                    <input type="text" class="questionTitle" name="questionTitle" required>
+                    <label for="questionType">Type de Question</label>
+                    <select class="questionType" name="questionType">
+                        <option value="ouverte">Ouverte</option>
+                        <option value="qcm">QCM</option>
+                    </select>
+                    <label for="questionReponses">Réponses (si QCM, séparez par une virgule)</label>
+                    <input type="text" class="questionReponses" name="questionReponses">
+                </div>
+            </div>
 
-<script src="../static/script.js"> </script>
-
+            <div class="form-group">
+                <button type="submit">Créer le Sondage</button>
+            </div>
+        </form>
+    </div>
+    <script src="../static/script.js"> </script>
 </body>
+
 </html>

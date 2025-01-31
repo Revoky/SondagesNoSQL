@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Sondages</title>
     <link rel="stylesheet" href="../static/main.css">
 </head>
+
 <body>
+    <div class="container">
+        <h1>Liste des Sondages</h1>
 
-<div class="container">
-    <h1>Liste des Sondages</h1>
-
-    {% if polls %}
+        {% if polls %}
         <ul>
             {% for poll in polls %}
-                <li>
-                    <a href="/sondages/{{ poll._id }}"> {{ poll.name }} </a>
-                </li>
+            <li>
+                <a href="/sondages/{{ poll._id }}"> {{ poll.name }} </a>
+
+                <a href="/sondages/edit/{{ poll._id }}">
+                    <button class="edit-button">Edit</button>
+                </a>                
+
+                <button class="delete-button" data-poll-id="{{ poll._id }}">Delete</button>
+            </li>
             {% endfor %}
         </ul>
-    {% else %}
+        {% else %}
         <p>Aucun sondage trouvé.</p>
-    {% endif %}
-</div>
-
+        {% endif %}
+    </div>
+    <script src="../static/delete.js"></script>
 </body>
+
 </html>

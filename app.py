@@ -107,7 +107,97 @@ def get_polls():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+    
+# _____ Route update _____
 
+@app.route('/sondages/<poll_id>', methods=['PUT'])
+def update_poll(poll_id):
+    try:
+        print(f"Réception d'une requête PUT pour le sondage {poll_id}")
+
+        data = request.json
+        print("Données reçues :", data)
+
+        name = data.get('name')
+        questions = data.get('questions')
+
+        if not name or not questions:
+            return jsonify({"error": "Tous les champs sont requis"}), 400
+
+        existing_poll = sondages_collection.find_one({"_id": ObjectId(poll_id)})
+        if not existing_poll:
+            return jsonify({"error": "Sondage non trouvé"}), 404
+
+        existing_questions = {str(q["_id"]): q for q in existing_poll.get("questions", [])}
+        
+        formatted_questions = []
+        for q in questions:
+            question_id = q.get("_id")
+
+            if question_id and question_id in existing_questions:
+                formatted_questions.append({
+                    "_id": ObjectId(question_id),
+                    "title": q.get("title"),
+                    "type": q.get("type"),
+                    "reponses": q.get("reponses", [])
+                })
+            else:
+                formatted_questions.append({
+                    "_id": ObjectId(),
+                    "title": q.get("title"),
+                    "type": q.get("type"),
+                    "reponses": q.get("reponses", [])
+                })
+
+        print("Questions formatées après suppression :", formatted_questions)
+
+        result = sondages_collection.update_one(
+            {"_id": ObjectId(poll_id)},
+            {"$set": {"name": name, "questions": formatted_questions}}
+        )
+
+        if result.matched_count == 0:
+            return jsonify({"message": "Sondage non trouvé"}), 404
+
+        return jsonify({"message": "Sondage mis à jour avec succès"}), 200
+
+    except Exception as e:
+        print("Erreur serveur :", str(e))
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/sondages/edit/<poll_id>')
+def edit_poll(poll_id):
+    try:
+        poll = sondages_collection.find_one({"_id": ObjectId(poll_id)})
+
+        if not poll:
+            return jsonify({"message": "Sondage introuvable"}), 404
+
+        for question in poll.get("questions", []):
+            question["_id"] = str(question["_id"])
+
+        return render_template('edit_poll.html', poll=poll)
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+# _____ Route suppression _____
+
+@app.route('/sondages/<poll_id>', methods=['DELETE'])
+def delete_poll(poll_id):
+    try:
+        result = sondages_collection.delete_one({"_id": ObjectId(poll_id)})
+        
+        if result.deleted_count == 0:
+            return jsonify({"message": "Poll not found"}), 404
+
+        return jsonify({"message": f"Poll with ID {poll_id} deleted successfully"}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

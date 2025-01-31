@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier le sondage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Modifier le sondage</h1>
+
+        <form id="editPollForm">
+            <label for="pollName">Nom du sondage</label>
+            <input type="text" id="pollName" name="pollName" value="{{ poll.name }}" required>
+
+            <div id="questionsContainer">
+                {% for question in poll.questions %}
+                <div class="form-group question">
+                    <label for="questionTitle">Titre de la Question</label>
+                    <input type="text" class="questionTitle" name="questionTitle" value="{{ question.title }}" required>
+                    <input type="hidden" class="questionId" value="{{ question._id }}">
+
+                    <label for="questionType">Type de Question</label>
+                    <select class="questionType" name="questionType">
+                        <option value="ouverte" {% if question.type=='ouverte' %}selected{% endif %}>Ouverte</option>
+                        <option value="qcm" {% if question.type=='qcm' %}selected{% endif %}>QCM</option>
+                    </select>
+
+                    <label for="questionReponses">Réponses (si QCM, séparez par une virgule)</label>
+                    <input type="text" class="questionReponses" name="questionReponses"
+                        value="{{ ','.join(question.reponses) if question.reponses else '' }}">
+
+                    <button type="button" class="delete-question-button">🗑 Supprimer</button>
+                </div>
+                {% endfor %}
+            </div>
+
+            <button type="button" class="add-question-button">Ajouter une question</button>
+            <button type="submit">Mettre à jour</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='edit.js') }}"></script>
+</body>
+
+</html>
