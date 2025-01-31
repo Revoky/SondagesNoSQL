@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réponses du Sondage - {{ poll.name }}</title>
+    <link rel="stylesheet" href="../static/main.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Réponses du Sondage : {{ poll.name }}</h1>
+
+        {% if responses %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date de soumission</th>
+                        {% for question in poll.questions %}
+                            <th>{{ question.title }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for response in responses %}
+                    <tr>
+                        <td>{{ response.submitted_at }}</td>
+                        {% for response_item in response.responses %}
+                            <td>{{ response_item.answer }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucune réponse enregistrée pour ce sondage.</p>
+        {% endif %}
+        
+        <a href="/sondages/list"><button>Retour à la liste des sondages</button></a>
+    </div>
+</body>
+
+</html>
