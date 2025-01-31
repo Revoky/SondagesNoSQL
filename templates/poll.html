@@ -8,28 +8,47 @@
 </head>
 <body>
 
-<div class="container">
-    <h1>{{ poll.name }}</h1>
+<form id="responseForm">
+    {% for question in poll.questions %}
+        <div class="question-response">
+            <p><strong>{{ question.title }}</strong> ({{ question.type }})</p>
+            {% if question.type == 'qcm' %}
+                {% for reponse in question.reponses %}
+                    <label>
+                        <input type="radio" name="response_{{ question._id }}" value="{{ reponse }}" required>
+                        {{ reponse }}
+                    </label>
+                {% endfor %}
+            {% else %}
+                <input type="text" name="response_{{ question._id }}" required>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <button type="submit">Envoyer</button>
+</form>
 
-    {% if poll.questions %}
-        <ul>
-            {% for question in poll.questions %}
-                <li>
-                    <strong>{{ question.title }}</strong> ({{ question.type }})
-                    {% if question.type == 'qcm' %}
-                        <ul>
-                            {% for reponse in question.reponses %}
-                                <li>{{ reponse }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Aucune question pour ce sondage.</p>
-    {% endif %}
-</div>
+<script>
+    document.getElementById("responseForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        const formData = new FormData(event.target);
+        const responses = [];
+    
+        formData.forEach((value, key) => {
+            responses.push({ question_id: key.replace("response_", ""), answer: value });
+        });
+    
+        fetch("/sondages/{{ poll._id }}/repondre", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ responses })
+        })
+        .then(response => response.json())
+        .then(data => alert(data.message))
+        .catch(error => alert("Erreur: " + error));
+    });
+    </script>
+    
 
 </body>
 </html>

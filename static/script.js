@@ -22,7 +22,6 @@ document.getElementById("pollForm").addEventListener("submit", function(event) {
         questions: questions
     };
 
-    // Request POST
     fetch('/sondages', {
         method: 'POST',
         headers: {
@@ -44,7 +43,6 @@ document.getElementById("pollForm").addEventListener("submit", function(event) {
 });
 
 // New question
-
 function addQuestion() {
     const questionContainer = document.getElementById("questionsContainer");
     const newQuestion = document.createElement("div");

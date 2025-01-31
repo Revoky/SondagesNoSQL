@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from pymongo import MongoClient
 from bson import ObjectId
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -178,6 +179,38 @@ def delete_poll(poll_id):
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+# _____ Route send answer _____
+
+reponses_collection = db["reponses"]
+
+@app.route('/sondages/<poll_id>/repondre', methods=['POST'])
+def submit_response(poll_id):
+    try:
+        data = request.json
+        responses = data.get("responses")
+
+        if not responses:
+            return jsonify({"error": "Aucune réponse fournie"}), 400
+
+        response_data = {
+            "poll_id": ObjectId(poll_id),
+            "submitted_at": datetime.utcnow(),
+            "responses": [
+                {"question_id": ObjectId(response["question_id"]), "answer": response["answer"]}
+                for response in responses
+            ]
+        }
+
+        reponses_collection.insert_one(response_data)
+
+        return jsonify({"message": "Réponses enregistrées avec succès"}), 201
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
