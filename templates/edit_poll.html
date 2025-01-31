@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <div class="container">
         <h1>Modifier le sondage</h1>
 
@@ -33,6 +32,8 @@
                     <label for="questionReponses">Réponses (si QCM, séparez par une virgule)</label>
                     <input type="text" class="questionReponses" name="questionReponses"
                         value="{{ ','.join(question.reponses) if question.reponses else '' }}">
+
+                    <button type="button" class="delete-question-button">🗑 Supprimer</button>
                 </div>
                 {% endfor %}
             </div>
@@ -41,8 +42,7 @@
             <button type="submit">Mettre à jour</button>
         </form>
     </div>
-
-    <script src="../static/edit.js"></script>
+    <script src="{{ url_for('static', filename='edit.js') }}"></script>
 </body>
 
 </html>

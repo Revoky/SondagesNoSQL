@@ -109,27 +109,48 @@ def get_polls():
         return jsonify({"error": str(e)}), 500
     
     
-# _____ Route mise à jour d'un sondage _____
+# _____ Route update _____
 
 @app.route('/sondages/<poll_id>', methods=['PUT'])
 def update_poll(poll_id):
     try:
+        print(f"Réception d'une requête PUT pour le sondage {poll_id}")
+
         data = request.json
+        print("Données reçues :", data)
+
         name = data.get('name')
         questions = data.get('questions')
 
         if not name or not questions:
             return jsonify({"error": "Tous les champs sont requis"}), 400
 
-        formatted_questions = [
-            {
-                "_id": ObjectId(q["_id"]) if "_id" in q and q["_id"] else ObjectId(),
-                "title": q.get("title"),
-                "type": q.get("type"),
-                "reponses": q.get("reponses", [])
-            }
-            for q in questions
-        ]
+        existing_poll = sondages_collection.find_one({"_id": ObjectId(poll_id)})
+        if not existing_poll:
+            return jsonify({"error": "Sondage non trouvé"}), 404
+
+        existing_questions = {str(q["_id"]): q for q in existing_poll.get("questions", [])}
+        
+        formatted_questions = []
+        for q in questions:
+            question_id = q.get("_id")
+
+            if question_id and question_id in existing_questions:
+                formatted_questions.append({
+                    "_id": ObjectId(question_id),
+                    "title": q.get("title"),
+                    "type": q.get("type"),
+                    "reponses": q.get("reponses", [])
+                })
+            else:
+                formatted_questions.append({
+                    "_id": ObjectId(),
+                    "title": q.get("title"),
+                    "type": q.get("type"),
+                    "reponses": q.get("reponses", [])
+                })
+
+        print("Questions formatées après suppression :", formatted_questions)
 
         result = sondages_collection.update_one(
             {"_id": ObjectId(poll_id)},
@@ -142,6 +163,7 @@ def update_poll(poll_id):
         return jsonify({"message": "Sondage mis à jour avec succès"}), 200
 
     except Exception as e:
+        print("Erreur serveur :", str(e))
         return jsonify({"error": str(e)}), 500
 
 

@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Code pour manipuler le DOM une fois qu'il est prêt
     const deleteButtons = document.querySelectorAll('.delete-button');
     
     if (deleteButtons.length === 0) {
