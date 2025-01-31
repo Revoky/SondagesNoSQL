@@ -9,14 +9,14 @@ db = client["sondages_db"]
 sondages_collection = db["sondages"]
 
 
-# _____ Route acceuil _____
+# _____ Route home _____
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
-# _____ Route polls _____
+# _____ Route display all polls _____
 
 @app.route('/sondages/list')
 def list_polls():
@@ -32,7 +32,7 @@ def list_polls():
         return jsonify({"error": str(e)}), 500
 
 
-# _____ Route poll _____
+# _____ Route display one poll _____
 
 @app.route('/sondages/<poll_id>')
 def show_poll(poll_id):
@@ -51,7 +51,7 @@ def show_poll(poll_id):
         return jsonify({"error": str(e)}), 500
 
 
-# _____ Route création _____
+# _____ Route create poll _____
 
 @app.route('/sondages', methods=['POST'])
 def create_poll():
@@ -87,29 +87,9 @@ def create_poll():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-
-# _____ Route consultation _____
-
-@app.route('/sondages', methods=['GET'])
-def get_polls():
-    try:
-        polls = list(sondages_collection.find({}, {"_id": 0}))
-        
-        for poll in polls:
-            for question in poll.get("questions", []):
-                question["_id"] = str(question["_id"])
-
-        if not polls:
-            return jsonify({"message": "No polls found"}), 404
-        
-        return jsonify(polls), 200
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
     
     
-# _____ Route update _____
+# _____ Route update poll _____
 
 @app.route('/sondages/<poll_id>', methods=['PUT'])
 def update_poll(poll_id):
@@ -184,7 +164,7 @@ def edit_poll(poll_id):
         return jsonify({"error": str(e)}), 500
 
 
-# _____ Route suppression _____
+# _____ Route delete poll _____
 
 @app.route('/sondages/<poll_id>', methods=['DELETE'])
 def delete_poll(poll_id):
