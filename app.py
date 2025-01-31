@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from pymongo import MongoClient
 from bson import ObjectId
-from datetime import datetime
+from datetime import datetime, timezone
 
 app = Flask(__name__)
 
@@ -196,7 +196,7 @@ def submit_response(poll_id):
 
         response_data = {
             "poll_id": ObjectId(poll_id),
-            "submitted_at": datetime.utcnow(),
+            "submitted_at": datetime.now(timezone.utc),
             "responses": [
                 {"question_id": ObjectId(response["question_id"]), "answer": response["answer"]}
                 for response in responses
