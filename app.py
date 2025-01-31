@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from pymongo import MongoClient
 from bson import ObjectId
+from datetime import datetime, timezone
 
 app = Flask(__name__)
 
@@ -9,14 +10,14 @@ db = client["sondages_db"]
 sondages_collection = db["sondages"]
 
 
-# _____ Route acceuil _____
+# _____ Route home _____
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
-# _____ Route polls _____
+# _____ Route display all polls _____
 
 @app.route('/sondages/list')
 def list_polls():
@@ -32,7 +33,7 @@ def list_polls():
         return jsonify({"error": str(e)}), 500
 
 
-# _____ Route poll _____
+# _____ Route display one poll _____
 
 @app.route('/sondages/<poll_id>')
 def show_poll(poll_id):
@@ -51,7 +52,7 @@ def show_poll(poll_id):
         return jsonify({"error": str(e)}), 500
 
 
-# _____ Route création _____
+# _____ Route create poll _____
 
 @app.route('/sondages', methods=['POST'])
 def create_poll():
@@ -87,29 +88,9 @@ def create_poll():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-
-# _____ Route consultation _____
-
-@app.route('/sondages', methods=['GET'])
-def get_polls():
-    try:
-        polls = list(sondages_collection.find({}, {"_id": 0}))
-        
-        for poll in polls:
-            for question in poll.get("questions", []):
-                question["_id"] = str(question["_id"])
-
-        if not polls:
-            return jsonify({"message": "No polls found"}), 404
-        
-        return jsonify(polls), 200
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
     
     
-# _____ Route update _____
+# _____ Route update poll _____
 
 @app.route('/sondages/<poll_id>', methods=['PUT'])
 def update_poll(poll_id):
@@ -184,7 +165,7 @@ def edit_poll(poll_id):
         return jsonify({"error": str(e)}), 500
 
 
-# _____ Route suppression _____
+# _____ Route delete poll _____
 
 @app.route('/sondages/<poll_id>', methods=['DELETE'])
 def delete_poll(poll_id):
@@ -198,6 +179,64 @@ def delete_poll(poll_id):
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+# _____ Route send answer _____
+
+reponses_collection = db["reponses"]
+
+@app.route('/sondages/<poll_id>/answer', methods=['POST'])
+def submit_response(poll_id):
+    try:
+        data = request.json
+        responses = data.get("responses")
+
+        if not responses:
+            return jsonify({"error": "Aucune réponse fournie"}), 400
+
+        response_data = {
+            "poll_id": ObjectId(poll_id),
+            "submitted_at": datetime.now(timezone.utc),
+            "responses": [
+                {"question_id": ObjectId(response["question_id"]), "answer": response["answer"]}
+                for response in responses
+            ]
+        }
+
+        reponses_collection.insert_one(response_data)
+
+        return jsonify({"message": "Réponses enregistrées avec succès"}), 201
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+# _____ Route display answers _____
+
+@app.route('/sondages/<poll_id>/reponses')
+def show_responses(poll_id):
+    try:
+        poll = sondages_collection.find_one({"_id": ObjectId(poll_id)})
+        if not poll:
+            return jsonify({"message": "Poll not found"}), 404
+        
+        responses = list(reponses_collection.find({"poll_id": ObjectId(poll_id)}))
+
+        formatted_responses = []
+        for response in responses:
+            formatted_responses.append({
+                "submitted_at": response.get("submitted_at").strftime('%Y-%m-%d %H:%M'),  # Formatée pour afficher date et heure
+                "responses": response.get("responses")
+            })
+
+        return render_template('responses.html', poll=poll, responses=formatted_responses)
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
