@@ -185,7 +185,7 @@ def delete_poll(poll_id):
 
 reponses_collection = db["reponses"]
 
-@app.route('/sondages/<poll_id>/repondre', methods=['POST'])
+@app.route('/sondages/<poll_id>/answer', methods=['POST'])
 def submit_response(poll_id):
     try:
         data = request.json
@@ -209,6 +209,32 @@ def submit_response(poll_id):
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+# _____ Route display answers _____
+
+@app.route('/sondages/<poll_id>/reponses')
+def show_responses(poll_id):
+    try:
+        poll = sondages_collection.find_one({"_id": ObjectId(poll_id)})
+        if not poll:
+            return jsonify({"message": "Poll not found"}), 404
+        
+        responses = list(reponses_collection.find({"poll_id": ObjectId(poll_id)}))
+
+        formatted_responses = []
+        for response in responses:
+            formatted_responses.append({
+                "submitted_at": response.get("submitted_at").strftime('%Y-%m-%d %H:%M'),  # Formatée pour afficher date et heure
+                "responses": response.get("responses")
+            })
+
+        return render_template('responses.html', poll=poll, responses=formatted_responses)
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 
 
 
