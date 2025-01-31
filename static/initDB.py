@@ -1,20 +1,31 @@
 from pymongo import MongoClient
 from bson import ObjectId
 from datetime import datetime, timezone
+from flask_bcrypt import Bcrypt
 
 client = MongoClient("mongodb://localhost:27017/")
 db = client["sondages_db"]
+users_collection = db["users"]
 sondages_collection = db["sondages"]
 reponses_collection = db["reponses"]
 
 def initialize_data():
     try:
+        users_collection.delete_many({})
         sondages_collection.delete_many({})
         reponses_collection.delete_many({})
+
+        admin_user = {
+            "username": "admin",
+            "password": Bcrypt().generate_password_hash("admin").decode('utf-8'),
+            "role": "admin"
+        }
+        admin_id = users_collection.insert_one(admin_user).inserted_id
 
         sondages_data = [
             {
                 "name": "One Piece",
+                "owner_id": admin_id,
                 "questions": [
                     {
                         "_id": ObjectId(),
@@ -50,6 +61,7 @@ def initialize_data():
             },
             {
                 "name": "League of Legends / Arcane",
+                "owner_id": admin_id,
                 "questions": [
                     {
                         "_id": ObjectId(),
@@ -85,6 +97,7 @@ def initialize_data():
             },
             {
                 "name": "Les chats",
+                "owner_id": admin_id,
                 "questions": [
                     {
                         "_id": ObjectId(),

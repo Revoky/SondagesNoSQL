@@ -1,13 +1,17 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect, url_for, flash
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user, UserMixin
+from flask_bcrypt import Bcrypt
 from pymongo import MongoClient
 from bson import ObjectId
 from datetime import datetime, timezone
 
 app = Flask(__name__)
+app.secret_key = 'secret_key'
 
 client = MongoClient("mongodb://localhost:27017/")
 db = client["sondages_db"]
 sondages_collection = db["sondages"]
+users_collection = db["users"]
 
 
 # _____ Route home _____
@@ -225,7 +229,7 @@ def show_responses(poll_id):
         formatted_responses = []
         for response in responses:
             formatted_responses.append({
-                "submitted_at": response.get("submitted_at").strftime('%Y-%m-%d %H:%M'),  # Formatée pour afficher date et heure
+                "submitted_at": response.get("submitted_at").strftime('%Y-%m-%d %H:%M'),
                 "responses": response.get("responses")
             })
 
@@ -234,6 +238,70 @@ def show_responses(poll_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
+# -------------------- LOGIN --------------------
+
+class User(UserMixin):
+    def __init__(self, user_data):
+        self.id = str(user_data["_id"])
+        self.username = user_data["username"]
+        self.password = user_data["password"]
+
+    def get_id(self):
+        return self.id
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+bcrypt = Bcrypt(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    user_data = users_collection.find_one({"_id": ObjectId(user_id)})
+    if user_data:
+        return User(user_data)
+    return None
+
+
+# _____ Route registration _____
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        
+        if users_collection.find_one({"username": username}):
+            flash("Username already taken", 'error')
+            return redirect(url_for('register'))
+        
+        users_collection.insert_one({"username": username, "password": hashed_password})
+        flash("Registration successful", 'success')
+        return redirect(url_for('login'))
+    
+    return render_template('register.html')
+
+
+# _____ Route login _____
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        user_data = users_collection.find_one({"username": username})
+        
+        if user_data and bcrypt.check_password_hash(user_data['password'], password):
+            user = User(user_data)
+            login_user(user)
+            flash("Login successful", 'success')
+            return redirect(url_for('index'))
+        else:
+            flash("Invalid credentials", 'error')
+            return redirect(url_for('login'))
+    
+    return render_template('login.html')
 
 
 
