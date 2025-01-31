@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ poll.name }}</title>
-    <link rel="stylesheet" href="../static/main.css">
+    <link rel="stylesheet" href="../static/poll-page.css">
 </head>
-<body>
 
-<div class="container">
-    <h1>{{ poll.name }}</h1>
+<body class="poll-page">
+    <div class="container">
+        <h1>{{ poll.name }}</h1>
 
-    {% if poll.questions %}
-        <ul>
+        {% if poll.questions %}
+        <ul class="question-list">
             {% for question in poll.questions %}
-                <li>
-                    <strong>{{ question.title }}</strong> ({{ question.type }})
-                    {% if question.type == 'qcm' %}
-                        <ul>
-                            {% for reponse in question.reponses %}
-                                <li>{{ reponse }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </li>
+            <li class="question-item">
+                <strong class="question-title">{{ question.title }}</strong>
+                <span class="question-type">({{ question.type }})</span>
+                {% if question.type == 'qcm' %}
+                <ul class="response-list">
+                    {% for reponse in question.reponses %}
+                    <li class="response-item">{{ reponse }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
             {% endfor %}
         </ul>
-    {% else %}
-        <p>Aucune question pour ce sondage.</p>
-    {% endif %}
-</div>
+        {% else %}
+        <p class="no-questions">Aucune question pour ce sondage.</p>
+        {% endif %}
+    </div>
 
 </body>
+
 </html>

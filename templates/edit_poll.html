@@ -5,16 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier le sondage</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='edit-page.css') }}">
 </head>
 
-<body>
+<body class="edit-page">
     <div class="container">
         <h1>Modifier le sondage</h1>
 
         <form id="editPollForm">
-            <label for="pollName">Nom du sondage</label>
-            <input type="text" id="pollName" name="pollName" value="{{ poll.name }}" required>
+            <div class="name-input">
+                <label for="pollName">Nom du sondage</label>
+                <input type="text" id="pollName" name="pollName" value="{{ poll.name }}" required>
+            </div>
 
             <div id="questionsContainer">
                 {% for question in poll.questions %}
@@ -33,13 +35,12 @@
                     <input type="text" class="questionReponses" name="questionReponses"
                         value="{{ ','.join(question.reponses) if question.reponses else '' }}">
 
-                    <button type="button" class="delete-question-button">🗑 Supprimer</button>
+                    <button type="button" class="delete-question-button">Supprimer la question</button>
                 </div>
                 {% endfor %}
             </div>
-
             <button type="button" class="add-question-button">Ajouter une question</button>
-            <button type="submit">Mettre à jour</button>
+            <button type="submit" class="update-button">Mettre à jour</button>
         </form>
     </div>
     <script src="{{ url_for('static', filename='edit.js') }}"></script>
