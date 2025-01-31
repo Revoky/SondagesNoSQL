@@ -34,21 +34,14 @@ h1 {
     margin-bottom: 30px;
 }
 
-/* Liste des questions */
-.question-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 20px;
-}
-
 /* Conteneur pour question et type */
 .question-item {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: #ffffff1f;
+    background-color: #ffffff1f; /* Fond semi-transparent */
     padding: 15px;
-    border-radius: 12px;
+    border-radius: 12px; /* Bordures arrondies */
     margin: 10px 0;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     gap: 10px;
@@ -108,4 +101,22 @@ h1 {
 .question-item:hover {
     border: 1px solid #ff9500;
     transition: all 0.3s ease;
+}
+
+/* Style de l'input pour les réponses */
+.response-input {
+    background-color: #444444;
+    border: none;
+    border-radius: 8px;
+    color: #bdbdbd;
+    padding: 10px;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.response-input:focus {
+    outline: none;
+    background-color: #555555;
 }

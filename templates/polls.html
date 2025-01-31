@@ -19,6 +19,9 @@
             <li>
                 <a href="/sondages/{{ poll._id }}"> {{ poll.name }} </a>
                 <div class="actions">
+                    <a href="/sondages/{{ poll._id }}/reponses">
+                        <button class="view-responses-button">Voir les réponses</button>
+                    </a>
                     <a href="/sondages/edit/{{ poll._id }}" class="edit-button">
                         <i class="fas fa-edit"></i>
                     </a>
