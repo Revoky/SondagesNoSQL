@@ -21,6 +21,9 @@
                 <a href="/sondages/edit/{{ poll._id }}">
                     <button class="edit-button">Edit</button>
                 </a>                
+                <a href="/sondages/{{ poll._id }}/reponses">
+                    <button class="view-responses-button">Voir les réponses</button>
+                </a>
 
                 <button class="delete-button" data-poll-id="{{ poll._id }}">Delete</button>
             </li>
