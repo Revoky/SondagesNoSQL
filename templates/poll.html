@@ -1,54 +1,37 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ poll.name }}</title>
-    <link rel="stylesheet" href="../static/main.css">
+    <link rel="stylesheet" href="../static/poll-page.css">
 </head>
-<body>
 
-<form id="responseForm">
-    {% for question in poll.questions %}
-        <div class="question-response">
-            <p><strong>{{ question.title }}</strong> ({{ question.type }})</p>
-            {% if question.type == 'qcm' %}
-                {% for reponse in question.reponses %}
-                    <label>
-                        <input type="radio" name="response_{{ question._id }}" value="{{ reponse }}" required>
-                        {{ reponse }}
-                    </label>
-                {% endfor %}
-            {% else %}
-                <input type="text" name="response_{{ question._id }}" required>
-            {% endif %}
-        </div>
-    {% endfor %}
-    <button type="submit">Envoyer</button>
-</form>
+<body class="poll-page">
+    <div class="container">
+        <h1>{{ poll.name }}</h1>
 
-<script>
-    document.getElementById("responseForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        
-        const formData = new FormData(event.target);
-        const responses = [];
-    
-        formData.forEach((value, key) => {
-            responses.push({ question_id: key.replace("response_", ""), answer: value });
-        });
-    
-        fetch("/sondages/{{ poll._id }}/answer", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ responses })
-        })
-        .then(response => response.json())
-        .then(data => alert(data.message))
-        .catch(error => alert("Erreur: " + error));
-    });
-    </script>
-    
-
+        {% if poll.questions %}
+        <ul class="question-list">
+            {% for question in poll.questions %}
+            <li class="question-item">
+                <strong class="question-title">{{ question.title }}</strong>
+                <span class="question-type">({{ question.type }})</span>
+                {% if question.type == 'qcm' %}
+                <ul class="response-list">
+                    {% for reponse in question.reponses %}
+                    <li class="response-item">{{ reponse }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="no-questions">Aucune question pour ce sondage.</p>
+        {% endif %}
+    </div>
 </body>
+  
 </html>
