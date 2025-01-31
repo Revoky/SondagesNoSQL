@@ -304,6 +304,15 @@ def login():
     return render_template('login.html')
 
 
+# _____ Route logout _____
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("Déconnexion réussie", 'success')
+    return redirect(url_for('index'))
+
 
 
 if __name__ == '__main__':
