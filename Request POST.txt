@@ -1,0 +1,15 @@
+{
+  "name": "Lore de LOL",
+  "questions": [
+    {
+      "title": "Comment s'appelle la nouvelle série dans l'univers de LoL qui sortira en 2025 ? (en)",
+      "type": "ouverte",
+      "reponses": ["Welcome to Noxus"]
+    },
+    {
+      "title": "A quel champion la série Arcane ne fait-elle aucune référence ?",
+      "type": "ouverte",
+      "reponses": ["Orianna", "Twitch", "Janna", "Urgot"]
+    }
+  ]
+}
