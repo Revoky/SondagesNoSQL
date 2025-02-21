@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Réponses du sondage - {{ poll.name }}</title>
-    <link rel="stylesheet" href="../static/responses.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='responses.css') }}">
 </head>
 
-<body>
+<body class="responses-page">
     <div class="container">
-        <h1>Réponses du sondage : {{ poll.name }}</h1>
+        <h1>{{ poll.name }}</h1>
 
         {% if responses %}
             <table>
@@ -37,7 +37,7 @@
             <p>Aucune réponse enregistrée pour ce sondage.</p>
         {% endif %}
         
-        <a href="/sondages/list"><button>Retour à la liste des sondages</button></a>
+        <a href="/" class="update-button">Retour à la liste des sondages</a>
     </div>
 </body>
 
