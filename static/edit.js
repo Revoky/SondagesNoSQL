@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Réponse serveur :", data);
             if (data.message) {
                 alert(data.message);
-                window.location.href = "/sondages/list";
+                window.location.href = "/";
             } else {
                 alert(data.error);
             }
