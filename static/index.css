@@ -1,59 +1,53 @@
-/* Style spécifique à la page index */
-body.index {
+body {
     background-color: #3d3d3d;
     color: #e0e0e0;
-    line-height: 1.6;
-    font-size: 16px;
+    font-size: 18px;
     font-family: 'Roboto', sans-serif;
 }
 
-/* Conteneur principal */
 .container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 30px auto;
-    padding: 30px;
+    width: 60%;
+    margin: 3% auto;
+    padding: 2%;
     background-color: #1f1f1f;
-    border-radius: 12px;
+    border-radius: 15px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Titre principal */
 h1 {
     text-align: center;
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 25px;
+    font-weight: bold;
     color: #ffffff;
-    margin-bottom: 30px;
+    margin: 0;
 }
 
-/* Liste des sondages */
+/*_______________ List _______________*/
+
 ul {
     list-style: none;
-    margin-top: 20px;
+    padding: 0;
+    width: 90%;
+    margin: auto;
 }
 
-/* Éléments de la liste */
 li {
-    background-color: #ffffff1f;
-    margin: 10px 0;
-    padding: 15px;
+    background-color: rgb(65, 65, 65);
+    margin: 1%;
+    padding: 1.5%;
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    gap: 15px;
     border: 1px solid #555555;
 }
 
-/* Lien vers un sondage */
+/*_______________ Link _______________*/
+
 li a {
-    color: #cacaca;
-    font-size: 1.1rem;
+    color: #e0e0e0;
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
 }
 
 .actions {
@@ -63,7 +57,41 @@ li a {
     align-items: center;
 }
 
-/* Bouton de suppression */
+/*_______________ Button _______________*/
+
+.create-button {
+    display: inline-block;
+    margin: 3%;
+    padding: 10px 15px;
+    color: #ffffff;
+    background-color: #1f1f1f;
+    border: #ff9500 1px solid;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+.create-button:hover {
+    background-color: #ff95007c;
+    color: #ffffff;
+}
+
+.view-responses {
+    padding: 5px 10px;
+    color: #ffffffb7;
+    background-color: rgb(65, 65, 65);
+    border: #ff9500 1px solid;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.view-responses:hover {
+    background-color: #ff95007c;
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
 .delete-button {
     background: none;
     border: none;
@@ -71,15 +99,12 @@ li a {
     cursor: pointer;
 }
 
-/* Icônes des boutons */
 .delete-button i, .edit-button i {
     font-size: 1.3rem;
     cursor: pointer;
-    transition: color 0.3s ease;
     padding: 5px;
 }
 
-/* Style des icônes */
 .delete-button i {
     color: #ff3b30;
 }
@@ -99,24 +124,4 @@ li a {
 .delete-button i:hover, .edit-button i:hover {
     transform: scale(1.1);
     transition: all 0.2s ease;
-}
-
-
-.create-button {
-    display: block;
-    width: fit-content;
-    margin: 20px auto;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #fff;
-    background-color: #28a745;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.create-button:hover {
-    background-color: #218838;
 }
