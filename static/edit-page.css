@@ -174,8 +174,10 @@ body.edit-page {
 
 .edit-page .add-question-button:hover {
     background-color: #e68900;
+    color: #ffffff;
 }
 
 .edit-page .delete-question-button:hover {
-    background-color: #d01f17;
+    background-color: #e92218;
+    color: #ffffff;
 }

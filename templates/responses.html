@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Réponses du Sondage - {{ poll.name }}</title>
-    <link rel="stylesheet" href="../static/main.css">
+    <title>Réponses du sondage - {{ poll.name }}</title>
+    <link rel="stylesheet" href="../static/response-page.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>Réponses du Sondage : {{ poll.name }}</h1>
+        <h1>Réponses du sondage : {{ poll.name }}</h1>
 
         {% if responses %}
             <table>
