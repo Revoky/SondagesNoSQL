@@ -102,7 +102,7 @@ form {
     padding: 10px 15px;
     color: #ffffff;
     background-color: #1f1f1f;
-    border: #ff9500 1px solid;
+    border: #ff9500 2px solid;
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
