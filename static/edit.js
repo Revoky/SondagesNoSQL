@@ -5,18 +5,26 @@ document.addEventListener("DOMContentLoaded", function () {
         const questionContainer = document.getElementById("questionsContainer");
         const newQuestion = document.createElement("div");
         newQuestion.classList.add("form-group", "question");
+
         newQuestion.innerHTML = `
-            <label for="questionTitle">Titre de la Question</label>
-            <input type="text" class="questionTitle" name="questionTitle" required>
-            <label for="questionType">Type de Question</label>
-            <select class="questionType" name="questionType">
-                <option value="ouverte">Ouverte</option>
-                <option value="qcm">QCM</option>
-            </select>
-            <label for="questionReponses">Réponses (si QCM, séparez par une virgule)</label>
-            <input type="text" class="questionReponses" name="questionReponses">
-            <button type="button" class="delete-question-button">🗑 Supprimer</button>
-        `;
+        <label for="questionTitle">Titre de la Question</label>
+        <input type="text" class="questionTitle" name="questionTitle" required>
+        <label for="questionType">Type de Question</label>
+        <select class="questionType" name="questionType">
+            <option value="ouverte">Ouverte</option>
+            <option value="qcm">QCM</option>
+        </select>
+        <label for="questionReponses">Réponses (si QCM, séparez par une virgule)</label>
+        <input type="text" class="questionReponses" name="questionReponses">
+        <div class="delete-button-container">
+            <button type="button" class="delete-question-button">-</button>
+        </div>
+    `;
+
+        newQuestion.querySelector(".delete-question-button").addEventListener("click", function () {
+            newQuestion.remove();
+        });
+
         questionContainer.appendChild(newQuestion);
     }
 
@@ -24,8 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.addEventListener("click", function (event) {
         if (event.target.classList.contains("delete-question-button")) {
-            console.log("Suppression d'une question.");
-            event.target.parentElement.remove();
+            const questionElement = event.target.closest(".question");
+            if (questionElement) {
+                questionElement.remove();
+            }
         }
     });
 
@@ -39,24 +49,27 @@ document.addEventListener("DOMContentLoaded", function () {
         const questions = [];
         const questionElements = document.querySelectorAll(".question");
 
+        if (pollName.trim() === "") {
+            alert("Le nom du sondage est requis.");
+            return;
+        }
+
         questionElements.forEach((questionElement) => {
-            const questionTitle = questionElement.querySelector(".questionTitle").value;
+            const questionTitle = questionElement.querySelector(".questionTitle").value.trim();
             const questionType = questionElement.querySelector(".questionType").value;
-            const questionReponses = questionElement.querySelector(".questionReponses").value.split(",");
+            const questionReponses = questionElement.querySelector(".questionReponses").value.split(",").map(reponse => reponse.trim());
             const questionId = questionElement.querySelector(".questionId")?.value || null;
 
-            console.log(`Question :`, {
-                _id: questionId,
-                title: questionTitle,
-                type: questionType,
-                reponses: questionReponses
-            });
+            if (questionTitle === "" || questionReponses === "") {
+                alert("Tous les champs de la question sont requis.");
+                return;
+            }
 
             questions.push({
                 _id: questionId || undefined,
                 title: questionTitle,
                 type: questionType,
-                reponses: questionReponses.map(reponse => reponse.trim())
+                reponses: questionReponses
             });
         });
 
@@ -74,19 +87,27 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify(pollData)
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Réponse serveur :", data);
-            if (data.message) {
-                alert(data.message);
-                window.location.href = "/";
-            } else {
-                alert(data.error);
-            }
-        })
-        .catch(error => {
-            alert("Erreur: " + error);
-            console.error("Erreur fetch :", error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log("Réponse serveur :", data);
+                if (data.message) {
+                    showConfirmationModal();
+                } else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => {
+                alert("Erreur: " + error);
+                console.error("Erreur fetch :", error);
+            });
     });
+
+    function showConfirmationModal() {
+        const modal = document.getElementById("confirmationModal");
+        modal.style.display = "flex";
+
+        setTimeout(function () {
+            window.location.href = "/";
+        }, 2000);
+    }
 });
