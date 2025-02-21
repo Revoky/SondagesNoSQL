@@ -42,8 +42,7 @@ document.getElementById("pollForm").addEventListener("submit", function(event) {
     .then(response => response.json())
     .then(data => {
         if (data.message) {
-            alert(data.message);
-            window.location.href = '/';
+            showConfirmationModal();
         } else {
             alert(data.error);
         }
@@ -52,6 +51,15 @@ document.getElementById("pollForm").addEventListener("submit", function(event) {
         alert("Erreur: " + error);
     });
 });
+
+function showConfirmationModal() {
+    const modal = document.getElementById("confirmationModal");
+    modal.style.display = "flex";
+
+    setTimeout(function() {
+        window.location.href = '/';
+    }, 2000);
+}
 
 // New question
 function addQuestion() {
