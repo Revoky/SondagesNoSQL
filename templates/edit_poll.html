@@ -21,11 +21,11 @@
             <div id="questionsContainer">
                 {% for question in poll.questions %}
                 <div class="form-group question">
-                    <label for="questionTitle">Titre de la Question</label>
+                    <label for="questionTitle">Titre de la question</label>
                     <input type="text" class="questionTitle" name="questionTitle" value="{{ question.title }}" required>
                     <input type="hidden" class="questionId" value="{{ question._id }}">
 
-                    <label for="questionType">Type de Question</label>
+                    <label for="questionType">Type de question</label>
                     <select class="questionType" name="questionType">
                         <option value="ouverte" {% if question.type=='ouverte' %}selected{% endif %}>Ouverte</option>
                         <option value="qcm" {% if question.type=='qcm' %}selected{% endif %}>QCM</option>

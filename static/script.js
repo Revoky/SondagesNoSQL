@@ -60,11 +60,3 @@ function addQuestion() {
     `;
     questionContainer.appendChild(newQuestion);
 }
-
-const addButton = document.createElement("button");
-addButton.type = "button";
-addButton.classList.add("add-question-button");
-addButton.textContent = "Ajouter une question";
-addButton.addEventListener("click", addQuestion);
-document.querySelector(".container").appendChild(addButton);
-

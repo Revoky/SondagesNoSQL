@@ -1,21 +1,14 @@
-/* Style global de la page */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
-
-/* Style de base pour le corps de la page */
-body {
+/* Style spécifique à la page d'édition */
+body.index-page {
     background-color: #3d3d3d;
     color: #e0e0e0;
     line-height: 1.6;
     font-size: 16px;
+    font-family: 'Roboto', sans-serif;
 }
 
-/* Style de la container principale */
-.container {
+/* Conteneur principal */
+.index-page .container {
     width: 90%;
     max-width: 1100px;
     margin: 30px auto;
@@ -25,129 +18,150 @@ body {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Titre principal de la page */
-h1 {
+
+/* Lien */
+.index-page a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 100px;
+    border: 1px solid #fa5f02;
+    color: #fa5f02;
+    background-color: transparent;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 20px;
+}
+
+.index-page a:hover {
+    background-color: #e68900;
+    color: #ffffff;
+}
+
+/* Titre principal */
+.index-page h1 {
     text-align: center;
     font-size: 1.5rem;
-    font-weight: 700;
     color: #ffffff;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
-/* Styles des formulaires et champs de saisie */
-form {
+/* Formulaire d'édition */
+.index-page form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
 }
 
-.form-group {
+.index-page .form-group {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    background-color: #ffffff1f;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #555555;
 }
 
-label {
+.index-page .form-group label {
     font-weight: 600;
     font-size: 1rem;
     color: #e0e0e0;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
-input[type="text"], select {
-    padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #333333;
-    border-radius: 8px;
-    background-color: #222222;
+.index-page .form-group input[type="text"],
+.index-page .form-group select {
+    padding: 14px;
+    font-size: 1.1rem;
+    border: 1px solid #555555;
+    border-radius: 10px;
+    background-color: #333333;
     color: #ffffff;
     transition: border-color 0.3s ease;
 }
 
-/* Focus sur les champs de saisie */
-input[type="text"]:focus, select:focus {
+.index-page .form-group input[type="text"]:focus,
+.index-page .form-group select:focus {
     outline: none;
-    border-color: #007aff;
+    border-color: #ff9500;
 }
 
-input[type="text"]::placeholder, select option {
+.index-page .form-group input[type="text"]::placeholder,
+.index-page .form-group select option {
     color: #888888;
 }
 
-/* Styles des boutons */
-button, .edit-button, .add-question-button {
-    padding: 12px 25px;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+/* Style des questions */
+.index-page .question {
+    background-color: #3a3a3a;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
 }
 
-/* Lien du sondage */
-li a {
-    color: #cacaca;
-    font-size: 1.1rem;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-/* Style des questions dans la page de création et édition */
-.question {
-    background-color: #2c2c2c;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.questionTitle {
-    font-size: 1.2rem;
+/* Titre de la question */
+.index-page .questionTitle {
+    font-size: 1.3rem;
     color: #ffffff;
     font-weight: 600;
     margin-bottom: 15px;
 }
 
-.questionReponses {
+/* Réponses */
+.index-page .questionReponses {
     font-size: 1rem;
     color: #bdbdbd;
-    margin-top: 10px;
 }
 
-.questionReponses::placeholder {
+.index-page .questionReponses::placeholder {
     color: #888888;
 }
 
-
-/* Style du bouton principal */
-button {
-    background-color: #007aff;
-    color: white;
-    border: none;
+/* Boutons */
+.index-page .add-question-button {
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 100px;
+    border: 1px solid #fa5f02;
+    color: #fa5f02;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
 }
 
-/* Style du bouton éditer */
-button.edit-button {
-    background-color: #ff9500;
-}
-
-/* Style du bouton ajouter une question */
-button.add-question-button {
-    background-color: #34c759;
-}
-
-/* Effet au survol des boutons */
-button:hover {
-    background-color: #0061d0;
-}
-
-button.edit-button:hover {
+.index-page .add-question-button:hover {
     background-color: #e68900;
+    color: #ffffff;
 }
 
-button.add-question-button:hover {
-    background-color: #28a745;
+.index-page .submit-button {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
 }
 
-/* Bouton désactivé */
-button:disabled {
-    background-color: #8e8e93;
-    cursor: not-allowed;
+.index-page .submit-button:hover {
+    background-color: #007e28;
+    color: white;
+    border-color: #007e28;
 }
