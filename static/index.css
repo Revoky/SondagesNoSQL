@@ -1,5 +1,5 @@
-/* Style spécifique à la page list-page */
-body.list-page {
+/* Style spécifique à la page index */
+body.index {
     background-color: #3d3d3d;
     color: #e0e0e0;
     line-height: 1.6;
@@ -99,4 +99,24 @@ li a {
 .delete-button i:hover, .edit-button i:hover {
     transform: scale(1.1);
     transition: all 0.2s ease;
+}
+
+
+.create-button {
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.create-button:hover {
+    background-color: #218838;
 }
