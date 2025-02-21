@@ -1,93 +1,43 @@
-/* Style global de la page */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+.question-response {
+    width: 100%;
 }
 
-/* Style de base pour le corps de la page */
-body.poll-page {
-    background-color: #3d3d3d;
-    color: #e0e0e0;
-    line-height: 1.6;
-    font-size: 16px;
-}
-
-/* Style de la container principale */
-.container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 30px auto;
-    padding: 30px;
-    background-color: #1f1f1f;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* Titre principal de la page */
-h1 {
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 30px;
-}
-
-/* Conteneur pour question et type */
 .question-item {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: #ffffff1f; /* Fond semi-transparent */
+    background-color: #3d3d3d; 
     padding: 15px;
-    border-radius: 12px; /* Bordures arrondies */
+    border-radius: 12px;
     margin: 10px 0;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     gap: 10px;
     border: 1px solid #555555;
 }
 
-/* Titre de chaque question */
-.question-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #ffffff;
-    margin-left: 15px;
-}
-
-/* Type de question */
 .question-type {
-    font-size: 1rem;
     color: #ff9500;
     margin-top: 5px;
     margin-left: 15px;
 }
 
-/* Liste des réponses */
 .response-list {
     list-style: none;
     padding: 0;
-    margin-top: 10px;
-    padding-left: 15px;
     width: 100%;
 }
 
-/* Style des éléments de réponse */
 .response-item {
     background-color: #444444;
     padding: 10px 15px;
     border-radius: 8px;
     margin: 8px 0;
     color: #bdbdbd;
-    font-size: 1rem;
     transition: background-color 0.3s ease;
 }
 
-/* Zone sans question */
 .no-questions {
     text-align: center;
-    font-size: 1.2rem;
     color: #e0e0e0;
     font-style: italic;
     margin-top: 40px;
@@ -103,20 +53,47 @@ h1 {
     transition: all 0.3s ease;
 }
 
-/* Style de l'input pour les réponses */
 .response-input {
     background-color: #444444;
     border: none;
     border-radius: 8px;
     color: #bdbdbd;
-    padding: 10px;
+    padding: 10px 0;
     width: 100%;
     margin-top: 10px;
-    font-size: 1rem;
     transition: background-color 0.3s ease;
 }
 
 .response-input:focus {
     outline: none;
     background-color: #555555;
+}
+
+/*_______________ Modal _______________*/
+
+.submit-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.submit-button {
+    width: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    display: inline-block;
+    padding: 10px 15px;
+    color: #ffffff;
+    background-color: #1f1f1f;
+    border: #ff9500 2px solid;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.submit-button:hover {
+    background-color: #ff95007c;
+    color: #ffffff;
 }

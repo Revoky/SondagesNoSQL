@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ poll.name }}</title>
     <link rel="stylesheet" href="../static/poll.css">
+    <link rel="stylesheet" href="../static/main.css">
 </head>
 
 <body class="poll-page">
@@ -35,7 +36,10 @@
                     </div>
                 </div>
             {% endfor %}
-            <button type="submit">Envoyer</button>
+
+            <div class="submit-container">
+                <button type="submit" class="submit-button">Envoyer</button>
+            </div>
         </form>
 
         <script>
