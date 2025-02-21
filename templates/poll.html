@@ -49,7 +49,7 @@
                     responses.push({ question_id: key.replace("response_", ""), answer: value });
                 });
 
-                fetch("/sondages/{{ poll._id }}/repondre", {
+                fetch("/sondages/{{ poll._id }}/answer", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ responses })
