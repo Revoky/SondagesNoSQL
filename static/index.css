@@ -51,6 +51,22 @@ li {
     border: 1px solid #555555;
 }
 
+.clickable {
+    cursor: pointer;
+    position: relative;
+    padding: 15px;
+}
+
+.clickable:hover {
+    border-color: #ff9500;
+    background-color: #333333;
+}
+
+.poll-name {
+    flex-grow: 1;
+}
+
+
 /*_______________ Link _______________*/
 
 li a {
@@ -90,15 +106,12 @@ li a {
 .view-responses {
     padding: 5px 10px;
     color: #ffffffb7;
-    background-color: rgb(65, 65, 65);
-    border: #ff9500 1px solid;
     border-radius: 8px;
     cursor: pointer;
 }
 
 .view-responses:hover {
-    background-color: #ff95007c;
-    color: #ffffff;
+    color: #444444;
     transition: all 0.2s ease;
 }
 
@@ -109,7 +122,7 @@ li a {
     cursor: pointer;
 }
 
-.delete-button i, .edit-button i {
+.delete-button i, .edit-button i, .view-responses i {
     font-size: 1.3rem;
     cursor: pointer;
     padding: 5px;
@@ -120,7 +133,7 @@ li a {
 }
 
 .delete-button i:hover {
-    color: #d01f17;
+    color: #ff0d007a;
 }
 
 .edit-button i {
@@ -128,10 +141,99 @@ li a {
 }
 
 .edit-button i:hover {
-    color: #e68900;
+    color: #ff95007c;
 }
 
-.delete-button i:hover, .edit-button i:hover {
-    transform: scale(1.1);
-    transition: all 0.2s ease;
+.view-responses i {
+    color: #ffffffb7;
 }
+
+.view-responses i:hover {
+    color: #8d8c8c76;
+}
+
+/*_______________ Tooltip _______________*/
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 150px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/*_______________ Modal _______________*/
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #3d3d3d;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.confirm-button, .cancel-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirm-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.confirm-button:hover {
+    background-color: #218838;
+}
+
+.cancel-button {
+    background-color: #ff3b30;
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #d01f17;
+}
+

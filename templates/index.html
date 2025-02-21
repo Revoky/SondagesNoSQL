@@ -19,14 +19,16 @@
             {% if polls %}
             <ul>
                 {% for poll in polls %}
-                <li>
-                    <a href="/sondages/{{ poll._id }}"> {{ poll.name }} </a>
+                <li class="clickable" data-url="/sondages/{{ poll._id }}">
+                    <span class="poll-name">{{ poll.name }}</span>
                     <div class="actions">
-                        <a href="/sondages/{{ poll._id }}/reponses">
-                            <button class="view-responses">Voir les réponses</button>
+                        <a href="/sondages/{{ poll._id }}/reponses" class="view-responses tooltip">
+                            <i class="fa fa-eye"></i>
+                            <span class="tooltiptext">Voir réponses</span>
                         </a>
-                        <a href="/sondages/edit/{{ poll._id }}" class="edit-button">
+                        <a href="/sondages/edit/{{ poll._id }}" class="edit-button tooltip">
                             <i class="fas fa-edit"></i>
+                            <span class="tooltiptext">Modifier</span>
                         </a>
                         <button class="delete-button" data-poll-id="{{ poll._id }}">
                             <i class="fas fa-trash-alt"></i>
@@ -35,6 +37,16 @@
                 </li>
                 {% endfor %}
             </ul>
+            
+        </div>
+        <div id="confirmation-modal" class="modal">
+            <div class="modal-content">
+                <h3>Êtes-vous sûr de vouloir supprimer ce sondage ?</h3>
+                <div class="modal-actions">
+                    <button id="confirm-delete" class="confirm-button">Oui</button>
+                    <button id="cancel-delete" class="cancel-button">Non</button>
+                </div>
+            </div>
         </div>
         {% else %}
         <p>Aucun sondage trouvé.</p>
@@ -42,6 +54,16 @@
     </div>
     
     <script src="../static/delete.js"></script>
+    <script>
+        document.querySelectorAll(".clickable").forEach(item => {
+            item.addEventListener("click", function(event) {
+                if (!event.target.closest(".actions")) {
+                    window.location.href = this.dataset.url;
+                }
+            });
+        });
+    </script>
+    
 </body>
 
 </html>
