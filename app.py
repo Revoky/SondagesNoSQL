@@ -12,14 +12,14 @@ sondages_collection = db["sondages"]
 
 # _____ Route home _____
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+@app.route('/create')
+def create():
+    return render_template('create_poll.html')
 
 
 # _____ Route display all polls _____
 
-@app.route('/sondages/list')
+@app.route('/')
 def list_polls():
     try:
         polls = list(sondages_collection.find({}, {"_id": 1, "name": 1}))
@@ -27,7 +27,7 @@ def list_polls():
         if not polls:
             return jsonify({"message": "No polls found"}), 404
 
-        return render_template('polls.html', polls=polls)
+        return render_template('index.html', polls=polls)
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500

@@ -1,5 +1,5 @@
 /* Style spécifique à la page d'édition */
-body.index-page {
+body.create_poll-page {
     background-color: #3d3d3d;
     color: #e0e0e0;
     line-height: 1.6;
@@ -8,7 +8,7 @@ body.index-page {
 }
 
 /* Conteneur principal */
-.index-page .container {
+.create_poll-page .container {
     width: 90%;
     max-width: 1100px;
     margin: 30px auto;
@@ -20,7 +20,7 @@ body.index-page {
 
 
 /* Lien */
-.index-page a {
+.create_poll-page a {
     display: inline-block;
     padding: 10px 20px;
     font-size: 1rem;
@@ -36,13 +36,13 @@ body.index-page {
     margin-bottom: 20px;
 }
 
-.index-page a:hover {
+.create_poll-page a:hover {
     background-color: #e68900;
     color: #ffffff;
 }
 
 /* Titre principal */
-.index-page h1 {
+.create_poll-page h1 {
     text-align: center;
     font-size: 1.5rem;
     color: #ffffff;
@@ -50,13 +50,13 @@ body.index-page {
 }
 
 /* Formulaire d'édition */
-.index-page form {
+.create_poll-page form {
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
 
-.index-page .form-group {
+.create_poll-page .form-group {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -66,15 +66,15 @@ body.index-page {
     border: 1px solid #555555;
 }
 
-.index-page .form-group label {
+.create_poll-page .form-group label {
     font-weight: 600;
     font-size: 1rem;
     color: #e0e0e0;
     margin-bottom: 8px;
 }
 
-.index-page .form-group input[type="text"],
-.index-page .form-group select {
+.create_poll-page .form-group input[type="text"],
+.create_poll-page .form-group select {
     padding: 14px;
     font-size: 1.1rem;
     border: 1px solid #555555;
@@ -84,19 +84,19 @@ body.index-page {
     transition: border-color 0.3s ease;
 }
 
-.index-page .form-group input[type="text"]:focus,
-.index-page .form-group select:focus {
+.create_poll-page .form-group input[type="text"]:focus,
+.create_poll-page .form-group select:focus {
     outline: none;
     border-color: #ff9500;
 }
 
-.index-page .form-group input[type="text"]::placeholder,
-.index-page .form-group select option {
+.create_poll-page .form-group input[type="text"]::placeholder,
+.create_poll-page .form-group select option {
     color: #888888;
 }
 
 /* Style des questions */
-.index-page .question {
+.create_poll-page .question {
     background-color: #3a3a3a;
     padding: 25px;
     border-radius: 12px;
@@ -105,7 +105,7 @@ body.index-page {
 }
 
 /* Titre de la question */
-.index-page .questionTitle {
+.create_poll-page .questionTitle {
     font-size: 1.3rem;
     color: #ffffff;
     font-weight: 600;
@@ -113,17 +113,17 @@ body.index-page {
 }
 
 /* Réponses */
-.index-page .questionReponses {
+.create_poll-page .questionReponses {
     font-size: 1rem;
     color: #bdbdbd;
 }
 
-.index-page .questionReponses::placeholder {
+.create_poll-page .questionReponses::placeholder {
     color: #888888;
 }
 
 /* Boutons */
-.index-page .add-question-button {
+.create_poll-page .add-question-button {
     padding: 12px 24px;
     font-size: 1rem;
     border-radius: 100px;
@@ -139,12 +139,12 @@ body.index-page {
     font-family: 'Roboto', sans-serif;
 }
 
-.index-page .add-question-button:hover {
+.create_poll-page .add-question-button:hover {
     background-color: #e68900;
     color: #ffffff;
 }
 
-.index-page .submit-button {
+.create_poll-page .submit-button {
     padding: 12px 30px;
     font-size: 1.1rem;
     border-radius: 100px;
@@ -160,7 +160,7 @@ body.index-page {
     font-family: 'Roboto', sans-serif;
 }
 
-.index-page .submit-button:hover {
+.create_poll-page .submit-button:hover {
     background-color: #007e28;
     color: white;
     border-color: #007e28;

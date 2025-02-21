@@ -59,25 +59,24 @@ Voici la liste des endpoints disponibles dans l'application :
 
 ### Backend
 
-- [ ] Connexion à MongoDB avec `pymongo`
-- [ ] Création de routes REST avec Flask
-- [ ] Gestion des erreurs et des exceptions dans Flask
-- [ ] CRUD des sondages
-- [ ] Réception des réponses aux sondages
-- [ ] Affichage des réponses aux sondages
-- [ ] Utilisation de `ObjectId` pour les identifiants MongoDB
-- [ ] Gestion des questions et réponses en format JSON
+- [x] Connexion à MongoDB avec `pymongo`
+- [x] Création de routes REST avec Flask
+- [x] Gestion des erreurs et des exceptions dans Flask
+- [x] CRUD des sondages
+- [x] Réception des réponses aux sondages
+- [x] Affichage des réponses aux sondages
+- [x] Utilisation de `ObjectId` pour les identifiants MongoDB
+- [x] Gestion des questions et réponses en format JSON
 
 ### Frontend
 
-- [ ] Création de formulaires dynamiques pour les sondages
-- [ ] Affichage des sondages et des réponses avec Flask et `render_template`
-- [ ] Soumission des sondages via des requêtes HTTP POST avec `fetch`
-- [ ] Ajout dynamique de questions dans les formulaires avec JavaScript
-- [ ] Affichage des réponses avec une date
+- [x] Affichage des sondages et des réponses avec Flask et `render_template`
+- [x] Soumission des sondages via des requêtes HTTP POST avec `fetch`
+- [x] Ajout dynamique de questions dans les formulaires avec JavaScript
+- [x] Affichage des réponses avec une date
 
 ### Gestion de la base de données
 
-- [ ] Suppression et ajout de données dans MongoDB à l'initialisation
+- [x] Suppression et ajout de données dans MongoDB à l'initialisation
 - [ ] Vérification des doublons dans la base de données (nom de sondage unique)
-- [ ] Insertion de réponses avec les IDs des questions correspondantes
+- [x] Insertion de réponses avec les IDs des questions correspondantes

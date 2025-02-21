@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/main.css">
+    <title>Créer un sondage</title>
+</head>
+
+<body class="create_poll-page">
+    <div class="container">
+        <a href="/">Voir la liste des sondages</a>
+
+        <h1>Créer un sondage</h1>
+        <form id="pollForm">
+            <div class="form-group">
+                <label for="pollName">Nom du sondage</label>
+                <input type="text" id="pollName" name="name" required>
+            </div>
+
+            <div class="questions-container" id="questionsContainer">
+                <div class="form-group question">
+                    <label for="questionTitle">Titre de la question</label>
+                    <input type="text" class="questionTitle" name="questionTitle" required>
+                    <label for="questionType">Type de question</label>
+                    <select class="questionType" name="questionType">
+                        <option value="ouverte">Ouverte</option>
+                        <option value="qcm">QCM</option>
+                    </select>
+                    <label for="questionReponses">Réponses (si QCM, séparez par une virgule)</label>
+                    <input type="text" class="questionReponses" name="questionReponses">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="add-question-button" onclick="addQuestion()">Ajouter une question</button>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="submit-button">Créer le sondage</button>
+            </div>
+        </form>
+    </div>
+    <script src="../static/script.js"></script>
+</body>
+
+</html>
