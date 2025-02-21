@@ -17,7 +17,7 @@
                 <label for="pollName">Nom du sondage</label>
                 <input type="text" id="pollName" name="name" required>
             </div>
-        
+
             <div id="questionsContainer">
                 <div class="form-group question-box">
                     <label>Titre de la question</label>
@@ -29,21 +29,26 @@
                     </select>
                     <label for="questionReponses">Réponses (si QCM, séparez par une virgule)</label>
                     <input type="text" class="questionReponses" name="questionReponses" required>
-        
                     <div class="delete-button-container">
                         <button type="button" class="delete-question-button">-</button>
                     </div>
                 </div>
             </div>
-        
+
             <button type="button" class="add-question-button" onclick="addQuestion()">+</button>
-        
+
             <div class="submit-container">
                 <button type="submit" class="submit-button">Créer le sondage</button>
             </div>
         </form>
-        
     </div>
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <h2>Sondage créé avec succès !</h2>
+            <p>Voulez allez être redirigé vers la page d'accueil</p>
+        </div>
+    </div>
+
     <script src="../static/script.js"></script>
     <script src="../static/delete.js"></script>
 </body>
