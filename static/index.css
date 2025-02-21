@@ -5,6 +5,14 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.createAndList {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 .container {
     width: 60%;
     margin: 3% auto;
@@ -15,11 +23,11 @@ body {
 }
 
 h1 {
+    margin: 1%;
     text-align: center;
     font-size: 25px;
     font-weight: bold;
-    color: #ffffff;
-    margin: 0;
+    color: #df8200;
 }
 
 /*_______________ List _______________*/
@@ -27,13 +35,13 @@ h1 {
 ul {
     list-style: none;
     padding: 0;
-    width: 90%;
-    margin: auto;
+    width: 100%;
 }
 
 li {
     background-color: rgb(65, 65, 65);
-    margin: 1%;
+    margin-top: 1%;
+    margin-bottom: 1%;
     padding: 1.5%;
     border-radius: 12px;
     display: flex;
@@ -60,8 +68,10 @@ li a {
 /*_______________ Button _______________*/
 
 .create-button {
+    width: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
     display: inline-block;
-    margin: 3%;
     padding: 10px 15px;
     color: #ffffff;
     background-color: #1f1f1f;
