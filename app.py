@@ -61,7 +61,7 @@ def create_poll():
         name = data.get('name')
         questions = data.get('questions')
 
-        if sondages_collection.find_one({"name": name}):
+        if sondages_collection.find_one({"name": {"$regex": f"^{name}$", "$options": "i"}}):
             return jsonify({"error": "Poll name already used"}), 400
         
         if not name or not questions:

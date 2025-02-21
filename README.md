@@ -78,5 +78,5 @@ Voici la liste des endpoints disponibles dans l'application :
 ### Gestion de la base de données
 
 - [x] Suppression et ajout de données dans MongoDB à l'initialisation
-- [ ] Vérification des doublons dans la base de données (nom de sondage unique)
+- [x] Vérification des doublons dans la base de données (nom de sondage unique)
 - [x] Insertion de réponses avec les IDs des questions correspondantes
