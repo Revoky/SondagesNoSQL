@@ -12,11 +12,9 @@
 <body class="index">
     <div class="container">
         <h1>Liste des sondages</h1>
-
-        <a href="/create">
-            <button class="create-button">Créer un nouveau sondage</button>
-        </a>        
-
+        
+        <a href="/create" class="create-button">+ Nouveau sondage</a>
+    
         {% if polls %}
         <ul>
             {% for poll in polls %}
@@ -24,7 +22,7 @@
                 <a href="/sondages/{{ poll._id }}"> {{ poll.name }} </a>
                 <div class="actions">
                     <a href="/sondages/{{ poll._id }}/reponses">
-                        <button class="view-responses-button">Voir les réponses</button>
+                        <button class="view-responses">Voir les réponses</button>
                     </a>
                     <a href="/sondages/edit/{{ poll._id }}" class="edit-button">
                         <i class="fas fa-edit"></i>
@@ -40,6 +38,7 @@
         <p>Aucun sondage trouvé.</p>
         {% endif %}
     </div>
+    
     <script src="../static/delete.js"></script>
 </body>
 
