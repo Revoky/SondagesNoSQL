@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
         newQuestion.classList.add("form-group", "question");
 
         newQuestion.innerHTML = `
-        <label for="questionTitle">Titre de la Question</label>
+        <label for="questionTitle">Titre de la question</label>
         <input type="text" class="questionTitle" name="questionTitle" required>
-        <label for="questionType">Type de Question</label>
+        <label for="questionType">Type de question</label>
         <select class="questionType" name="questionType">
             <option value="ouverte">Ouverte</option>
             <option value="qcm">QCM</option>
